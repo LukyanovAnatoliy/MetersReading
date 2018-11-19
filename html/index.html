@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Настройка ESP8266</title>
+  <style type="text/css">
+    .table{
+        display: table;
+        width: 100%;
+        margin-top: 5px;
+    }
+    .cell{
+        display: table-cell;
+        width: 50%;
+    }
+    .right{
+        text-align: right;
+        padding-right: 5px;
+    }
+    .left{
+        text-align: left;
+    }
+    .hidden{
+        display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+    <div class="table">
+        <div class="cell" align="center"><b>Параметры Wi-Fi</b></div>
+    </div>
+
+    <div class="table">
+        <div class="cell right">SSID</div>
+        <div class="cell left"><input type="text" name="ssid" id="ssid"/> </div>
+    </div>
+
+    <div class="table">
+        <div class="cell right">Пароль</div>
+        <div class="cell left"><input type="text" name="password" id="password"/> </div>
+    </div>
+
+    <div class="table">
+        <div class="cell" align="center"><b>Параметры канала</b></div>
+    </div>
+
+    <div class="table">
+        <div class="cell right">API key </div>
+        <div class="cell left"><input type="text" name="api_key" id="api_key" style="text-transform: uppercase" /> </div>
+    </div>
+
+    <br>
+
+    <div class="table">
+        <div class="cell right">Тип счетчика</div>
+        <div class="cell left">
+            <select size="1" name="type_meter" id="type_meter" onchange="setVisibleBlock()">
+                <option selected value="1">Расход воды</option>
+                <option value="2">Расход электроэнергии</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Расход воды -->
+    <div class="table" id="waterMeterParam">
+        <div class="table">
+            <div class="cell" align="center"><b>Параметры счетчика холодной воды</b></div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для инкрементирующего значения</div>
+            <div class="cell left">
+                <select size="1" name="cold_field_incr" id="cold_field_incr">
+                    <option selected value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для результирующего значения</div>
+            <div class="cell left">
+                <select size="1" name="cold_field_total" id="cold_field_total">
+                    <option value="field1">Field 1</option>
+                    <option selected value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Текущее значение</div>
+            <div class="cell left"><input class="numberinput" type="text" name="cold_value" id="cold_value" /></div>
+        </div>
+
+        <div class="table">
+            <div class="cell" align="center"><b>Параметры счетчика горячей воды</b></div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для инкрементирующего значения</div>
+            <div class="cell left">
+                <select size="1" name="hot_field_incr" id="hot_field_incr">
+                    <option value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option selected value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для результирующего значения</div>
+            <div class="cell left">
+                <select size="1" name="hot_field_total" id="hot_field_total">
+                    <option value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option selected value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Текущее значение</div>
+            <div class="cell left"><input class="numberinput" type="text" name="hot_value" id="hot_value" /></div>
+        </div>
+    </div>
+
+    <!-- Электроэнергия -->
+    <div class="table hidden" id="powerMeterParam">
+        <div class="table">
+            <div class="cell" align="center"><b>Параметры электросчетчика</b></div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для инкрементирующего значения</div>
+            <div class="cell left">
+                <select size="1" name="power_field_incr" id="power_field_incr">
+                    <option value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option selected value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для результирующего значения</div>
+            <div class="cell left">
+                <select size="1" name="power_field_total" id="power_field_total">
+                    <option value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option selected value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для текущего потребления</div>
+            <div class="cell left">
+                <select size="1" name="power_field_current_cons" id="power_field_current_cons">
+                    <option value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option selected value="field7">Field 7</option>
+                    <option value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Поле для максимального значения за период</div>
+            <div class="cell left">
+                <select size="1" name="power_field_max_value" id="power_field_max_value">
+                    <option value="field1">Field 1</option>
+                    <option value="field2">Field 2</option>
+                    <option value="field3">Field 3</option>
+                    <option value="field4">Field 4</option>
+                    <option value="field5">Field 5</option>
+                    <option value="field6">Field 6</option>
+                    <option value="field7">Field 7</option>
+                    <option selected value="field8">Field 8</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Кол-во импульсов на 1кВт*ч</div>
+            <div class="cell left"><input class="numberinput" type="text" name="count_impuls_in_kW" id="count_impuls_in_kW" /></div>
+        </div>
+
+        <div class="table">
+            <div class="cell right">Текущее значение в Вт*ч</div>
+            <div class="cell left"><input class="numberinput" type="text" name="power_value" id="power_value" /></div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="table">
+        <div class="cell" align="center"><button onclick="sendPost()">Сохранить</button></div>
+    </div>
+
+</body>
+
+<script>
+    (function setInputOnlyNumber () {
+        var list_input = document.querySelectorAll(".numberinput");
+        for (var i = 0; i < list_input.length; i++) {
+            list_input[i].addEventListener("keypress", function(e) {
+                console.log(e.charCode);
+                if ((e.charCode >= 48) && (e.charCode <= 57))
+                    return true;
+                else {
+                    e.preventDefault();
+                    return false;    
+                }
+                
+            }, true);
+        }
+    })();
+    (function setPreviousValue () {
+        var params = decodeURIComponent(window.location.search).substring(1).split("&");
+        for(var i = 0; i < params.length; i++){
+            console.log(params[i]);
+            var param_value = params[i].split("=");
+            console.log(param_value);
+            if (param_value.length == 2){
+                var elem = document.getElementById(param_value[0]);
+                if (elem != null){
+                    if ((elem.type.indexOf("select") > -1) && (param_value[1] == ""))
+                        continue;
+                    elem.value = param_value[1];
+                }
+            }
+            setVisibleBlock()
+        }
+    })();
+    function setVisibleBlock(){
+        var typeAccounting = document.getElementById("type_meter");
+        var selectedType = typeAccounting.value;            
+        
+        var waterMeterParam = document.getElementById("waterMeterParam");
+        var powerMeterParam = document.getElementById("powerMeterParam");
+        if (selectedType == 1) {
+            if (waterMeterParam.classList.contains("hidden")) {
+                waterMeterParam.classList.remove("hidden");
+            }
+            if (!powerMeterParam.classList.contains("hidden")) {
+                powerMeterParam.classList.add("hidden");
+            }
+        } else {
+            if (!waterMeterParam.classList.contains("hidden")) {
+                waterMeterParam.classList.add("hidden");
+            }
+            if (powerMeterParam.classList.contains("hidden")) {
+                powerMeterParam.classList.remove("hidden");
+            }
+        }
+    };
+    function sendPost() {
+        var post_str = "";
+
+        var inputs_list = document.getElementsByTagName("input");
+        for(var i = 0; i < inputs_list.length; i++) {
+            post_str += inputs_list[i].id + "=" + encodeURIComponent(inputs_list[i].value) + "&";
+        }
+
+        var select_list = document.getElementsByTagName("select");
+        for(var i = 0; i < select_list.length; i++) {
+            post_str += select_list[i].id + "=" + encodeURIComponent(select_list[i].value);
+            if (i < select_list.length - 1) {
+                post_str += "&";
+            }
+        }
+        var xmlhttp = new window.XMLHttpRequest() ; // Создаём объект XMLHTTP
+        xmlhttp.open('POST', "http://1.1.1.1/", true); // Открываем асинхронное соединение
+        xmlhttp.send(post_str); // Отправляем POST-запрос
+    }
+</script>
+
+</html>
