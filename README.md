@@ -20,3 +20,7 @@
 
 ## Приложение
 Приложение работает с сервисом [thingspeak](https://thingspeak.com/) и ему не важно кто туда передает данные. 
+
+<img src="https://github.com/LukyanovAnatoliy/MetersReading/blob/master/image/device1.jpg" />
+
+<img src="https://github.com/LukyanovAnatoliy/MetersReading/blob/master/image/device2.jpg"/>
