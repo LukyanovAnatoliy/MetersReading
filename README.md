@@ -1,6 +1,9 @@
 <a href='https://play.google.com/store/apps/details?id=lav.watermeter&referrer=utm_source%3DGitHub'><img width="180" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+
+[Habrahabr](https://habr.com/post/428844/)
+
 ## MetersReading
-Данное устройство предназначено для сбора данных по расходу воды, электроэнергии, можно следить за датчиками протечки либо использовать для чего то другого где необходимо отслеживать состояние выводов. Для хранения данных используется сервис [thingspeak](https://thingspeak.com/). В качестве основного модуля использовалась ESP-03. Прошивка модуля собрана при помощи [online-конструктора](http://nodemcu-build.com)
+Данное устройство предназначено для сбора данных по расходу воды, электроэнергии, можно следить за датчиками протечки или использовать для чего-то другого, где необходимо отслеживать состояние выводов. Для хранения данных используется сервис [thingspeak](https://thingspeak.com/). В качестве основного модуля использовалась ESP-03. Прошивка модуля собрана при помощи [online-конструктора](http://nodemcu-build.com)
 
 <img src="https://github.com/LukyanovAnatoliy/MetersReading/blob/master/image/scheme.png"/>
 
