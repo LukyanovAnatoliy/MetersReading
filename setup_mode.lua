@@ -111,7 +111,7 @@ end)
 
 -- запускаем таймер на отключение режима настройки
 -- отключаем режим настройки через 60 секунд
-tmr.alarm(0, 20000, tmr.ALARM_SINGLE, function()
+tmr.alarm(0, 60000, tmr.ALARM_SINGLE, function()
 
     print("execute stop setup mode");
     
